@@ -26,11 +26,11 @@
 - email                     VARCHAR(30)     NOTNULL
 - telefono                  VARCHAR(30)     NOTNULL
 
-# Studenti:
+## Studenti:
 - id_studenti(matricola)    VARCHAR(30) PRIMARY KEY UNIQUE NOTNULL
 - nome                      VARCHAR(30)     NOTNULL
 - cognome                   VARCHAR(30)     NOTNULL
-- luogo_nascita          VARCHAR(30)     NOTNULL
+- luogo_nascita             VARCHAR(30)     NOTNULL
 - data_nascita              DATE            NOTNULL
 - indirizzo                 VARCHAR(30)     NOTNULL
 - email                     VARCHAR(30)     NOTNULL
