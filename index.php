@@ -24,10 +24,9 @@ if ($connection && $connection->connect_error) {
 # 4. Eseguiamo una query se la connesione é stata stabilita
 echo 'Connection Successful, go go go!';
 
-$statement = $connection->prepare("INSERT INTO `students` (`name`,`lastname`) VALUES (?, ?, ?)");
-$statement->bind_param("iss", $user_id, $title, $desc);
+$statement = $connection->prepare("INSERT INTO `students` (`name`) VALUES (?)");
+$statement->bind_param("iss", $name);
 $name = "Fabio";
-$lastname = "Ferrara";
 $statement->execute();
 var_dump($statement);
 
