@@ -21,20 +21,27 @@ if ($connection && $connection->connect_error) {
   echo "Connection failed: " . $connection->connect_error;
   die();
 }
-# 4. Eseguiamo una query se la connesione é stata stabilita
+# 4. Eseguiamo una query se la connesione é stata stabilita con un prepared statements
 echo 'Connection Successful, go go go!';
 
-$statement = $connection->prepare("INSERT INTO `students` (`name`) VALUES (?)");
-$statement->bind_param("iss", $name);
-$name = "Fabio";
+$statement = $connection->prepare("INSERT INTO `students` (`name`,`surname`,`degree_id`, `date_of_birth`, `fiscal_code`, `enrolment_date`, `registration_number`, `email`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+$statement->bind_param("ssisssis", $name, $surname, $degree_id, $date_of_birth, $fiscal_code, $enrolment_date, $registration_number, $email);
+$name = "Diego";
+$surname = "Gastaldi";
+$degree_id = 75;
+$date_of_birth = "1994-06-06";
+$fiscal_code = "GSTDIG94G6949S";
+$enrolment_date = "2019-03-06";
+$registration_number = 4116026;
+$email = "dg94@email.com";
 $statement->execute();
 var_dump($statement);
 
 $results = $connection->query("SELECT * FROM `students`;");
 if ($results && $results->num_rows > 0) {
-  var_dump($results);
+  #var_dump($results);
   while ($row = $results->fetch_assoc()) {
-    var_dump($row);
+    #var_dump($row);
   }
 } elseif ($results) {
   # code...
