@@ -22,8 +22,30 @@ if ($connection && $connection->connect_error) {
   die();
 }
 # 4. Eseguiamo una query se la connesione é stata stabilita
-echo 'Connection Successful, Go!';
+echo 'Connection Successful, go go go!';
 
+$statement = $connection->prepare("INSERT INTO `students` (`name`,`lastname`) VALUES (?, ?, ?)");
+$statement->bind_param("iss", $user_id, $title, $desc);
+$name = "Fabio";
+$lastname = "Ferrara";
+$statement->execute();
+var_dump($statement);
+
+$results = $connection->query("SELECT * FROM `students`;");
+if ($results && $results->num_rows > 0) {
+  var_dump($results);
+  while ($row = $results->fetch_assoc()) {
+    var_dump($row);
+  }
+} elseif ($results) {
+  # code...
+  echo "0 Results";
+} else {
+  echo "Query Error";
+}
+
+
+/* 
 $name = $_GET['name'];
 $sql = "SELECT * FROM `students` WHERE `name` = '" . $name . "';";
 var_dump($sql);
@@ -44,7 +66,7 @@ if ($results && $results->num_rows > 0) {
   echo 'Nessun Risultato';
 } else {
   echo 'Errore nella query';
-}
+} */
 
 # 6. Chiudi la connessione
 $connection->close();
